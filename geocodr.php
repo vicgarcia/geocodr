@@ -26,12 +26,11 @@ $query = preg_replace('/\s+/', ' ', "
 $app = new Slim\Slim();
 
 $app->post('/', function() use ($app, $tokens, $connection, $query) {
-    $address = $app->request()->params('address');
     $token = $app->request()->params('token');
-
     if (in_array($token, $tokens)) {
         $db = new PDO($connection);
         $stmt = $db->prepare($query);
+        $address = $app->request()->params('address');
         $stmt->execute([':address' => $address]);
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -45,7 +44,7 @@ $app->post('/', function() use ($app, $tokens, $connection, $query) {
 
 $app->notFound(function () use ($app) {
     $app->response->setStatus(404);
-    echo 'nothing there';
+    echo 'nothing here';
 });
 
 $app->error(function (\Exception $e) use ($app) {
