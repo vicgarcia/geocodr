@@ -1,4 +1,4 @@
-SELECT 
+SELECT
   g.rating,
   ST_X(g.geomout) As lon,
   ST_Y(g.geomout) As lat,
@@ -8,10 +8,10 @@ SELECT
   (addy).location As city,
   (addy).stateabbrev As st,
   (addy).zip
-FROM 
+FROM
   geocode('905 W Carmen Ave, Chicago, IL 60640') AS g;
 
-SELECT 
+SELECT
   g.rating,
   ST_X(g.geomout) As lon,
   ST_Y(g.geomout) As lat,
@@ -21,10 +21,10 @@ SELECT
   (addy).location As city,
   (addy).stateabbrev As st,
   (addy).zip
-FROM 
+FROM
   geocode('2712 N Milwaukee, 60647') AS g;
 
-SELECT 
+SELECT
   g.rating,
   ST_X(g.geomout) As lon,
   ST_Y(g.geomout) As lat,
@@ -34,5 +34,5 @@ SELECT
   (addy).location As city,
   (addy).stateabbrev As st,
   (addy).zip
-FROM 
+FROM
   geocode('1333 W Winona, Chicago, IL') AS g;
