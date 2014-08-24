@@ -5,8 +5,7 @@ require '../vendor/autoload.php';
 use \Slim;
 use \PDO;
 
-$app = new Slim\Slim();
-$tokens = array('xxxxx');
+$tokens = require '../tokens.php';
 
 $sql = preg_replace('/\s+/', ' ', "
   SELECT
@@ -23,6 +22,8 @@ $sql = preg_replace('/\s+/', ' ', "
     geocode(:address) AS g;
 ");
 
+$app = new Slim\Slim();
+
 $app->post('/', function() use ($app, $tokens, $sql) {
     $address = $app->request()->params('address');
     $token = $app->request()->params('token');
@@ -34,10 +35,10 @@ $app->post('/', function() use ($app, $tokens, $sql) {
         $stmt = $db->prepare($sql);
         $stmt->execute([':address' => $address]);
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        var_dump($rows);
+        //var_dump($rows);
 
         $app->response->setStatus(200);
-        echo 'valid token';
+        echo json_encode($rows);
     } else {
         $app->response->setStatus(403);
         echo 'invalid token';
@@ -46,7 +47,7 @@ $app->post('/', function() use ($app, $tokens, $sql) {
 
 $app->notFound(function () use ($app) {
     $app->response->setStatus(404);
-    echo 'not found';
+    echo 'nothing there';
 });
 
 $app->error(function (\Exception $e) use ($app) {
