@@ -6,8 +6,9 @@ use \Slim;
 use \PDO;
 
 $tokens = require '../tokens.php';
+$connection = require '../connection.php';
 
-$sql = preg_replace('/\s+/', ' ', "
+$query = preg_replace('/\s+/', ' ', "
   SELECT
     g.rating,
     ST_X(g.geomout) As lon,
@@ -24,21 +25,18 @@ $sql = preg_replace('/\s+/', ' ', "
 
 $app = new Slim\Slim();
 
-$app->post('/', function() use ($app, $tokens, $sql) {
+$app->post('/', function() use ($app, $tokens, $connection, $query) {
     $address = $app->request()->params('address');
     $token = $app->request()->params('token');
 
     if (in_array($token, $tokens)) {
-        $db = new PDO(
-            'pgsql:dbname=geocodr;host=localhost;user=geocodr;password=geocodr'
-        );
-        $stmt = $db->prepare($sql);
+        $db = new PDO($connection);
+        $stmt = $db->prepare($query);
         $stmt->execute([':address' => $address]);
-        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        //var_dump($rows);
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $app->response->setStatus(200);
-        echo json_encode($rows);
+        echo json_encode($results);
     } else {
         $app->response->setStatus(403);
         echo 'invalid token';
