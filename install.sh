@@ -46,7 +46,7 @@ su - postgres -c "psql -A -t -d geocodr -c \"SELECT loader_generate_script(ARRAY
 su - postgres -c "psql -A -t -d geocodr -c \"SELECT install_missing_indexes();\""
 
 # test geocoder (check in vagrant install log output)
-su - postgres -c "psql -d geocodr < /vagrant/geocode.sql"
+su - postgres -c "psql -d geocodr < /vagrant/geocode_query.sql"
 
 # install nginx and php
 apt-get -y install php5-fpm php5-cli php5-mcrypt php5-pgsql nginx
