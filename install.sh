@@ -2,10 +2,10 @@
 
 # update apt repositories and install essentials
 apt-get -y update
-apt-get -y install build-essential python-software-properties
+apt-get -y install git curl unzip build-essential python-software-properties
 
 # install user shell environment software
-apt-get -y install vim-nox git tmux curl unzip ack-grep
+apt-get -y install vim-nox tmux ack-grep
 
 # install my user environment environment
 su - vagrant -c "curl -s http://rockst4r.net/vicg4rcia.sh | bash"
@@ -29,9 +29,6 @@ su - postgres -c "psql -d geocodr -c \"CREATE EXTENSION postgis;\""
 su - postgres -c "psql -d geocodr -c \"CREATE EXTENSION postgis_topology;\""
 su - postgres -c "psql -d geocodr -c \"CREATE EXTENSION postgis_tiger_geocoder;\""
 
-# test address normalization (check in vagrant install log output)
-su - postgres -c "psql -d geocodr -c \"SELECT na.address, na.streetname, na.zip FROM normalize_address('1 South St, Philadelphia, PA 19130') as na;\""
-
 # setup geocoder loader
 # http://gis.stackexchange.com/questions/81907/install-postgis-and-tiger-data-in-ubuntu-12-04
 # http://www.peterstratton.com/2014/04/your-own-private-geocoder-using-postgis-and-ubuntu/
@@ -44,9 +41,6 @@ su - postgres -c "psql -A -t -d geocodr -c \"SELECT loader_generate_nation_scrip
 su - postgres -c "psql -A -t -d geocodr -c \"SELECT loader_generate_script(ARRAY['IL'], 'geocodr');\"" | sh
 # install any missing indexes
 su - postgres -c "psql -A -t -d geocodr -c \"SELECT install_missing_indexes();\""
-
-# test geocoder (check in vagrant install log output)
-su - postgres -c "psql -d geocodr < /vagrant/geocode_query.sql"
 
 # install nginx and php
 apt-get -y install php5-fpm php5-cli php5-mcrypt php5-pgsql nginx
