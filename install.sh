@@ -49,6 +49,7 @@ mkdir /opt/geocodr
 mkdir /opt/geocodr/public
 cp /vagrant/composer.json /opt/geocodr/composer.json
 cp /vagrant/geocodr.php /opt/geocodr/public/index.php
+cp /vagrant/config.php /opt/geocodr/config.php
 cd /opt/geocodr
 curl -s https://getcomposer.org/installer | php
 php composer.phar install
