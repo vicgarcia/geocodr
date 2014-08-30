@@ -26,16 +26,16 @@ su - postgres -c "psql -d geocodr -c \"CREATE EXTENSION postgis_tiger_geocoder;\
 # setup geocoder loader
 # http://gis.stackexchange.com/questions/81907/install-postgis-and-tiger-data-in-ubuntu-12-04
 # http://www.peterstratton.com/2014/04/your-own-private-geocoder-using-postgis-and-ubuntu/
+# note : the array on line 35 accepts states to use when generating the loading scripts
 mkdir /gisdata
 # configure for loader script generation
 su - postgres -c "psql -d geocodr < /vagrant/insert_geocodr_os.sql"
 su - postgres -c "psql -d geocodr < /vagrant/update_declare_sect.sql"
 # generate and run loader scripts
-#su - postgres -c "psql -A -t -d geocodr -c \"SELECT loader_generate_nation_script('geocodr');\"" | sh
-#su - postgres -c "psql -A -t -d geocodr -c \"SELECT loader_generate_script(ARRAY['IL'], 'geocodr');\"" | sh
+su - postgres -c "psql -A -t -d geocodr -c \"SELECT loader_generate_nation_script('geocodr');\"" | sh
+su - postgres -c "psql -A -t -d geocodr -c \"SELECT loader_generate_script(ARRAY['IL'], 'geocodr');\"" | sh
 # install any missing indexes
 su - postgres -c "psql -A -t -d geocodr -c \"SELECT install_missing_indexes();\""
-# note : the array on line 35 accepts states to use when generating the loading scripts
 
 # install nginx and php
 apt-get -y install php5-fpm php5-cli php5-mcrypt php5-pgsql nginx
