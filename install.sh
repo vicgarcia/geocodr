@@ -56,10 +56,3 @@ php composer.phar install
 chown -R www-data:www-data /opt/geocodr/
 service nginx restart
 
-
-# install user shell environment software
-apt-get -y install vim-nox tmux ack-grep
-
-# install my user environment environment
-su - vagrant -c "curl -s http://rockst4r.net/vicg4rcia.sh | bash"
-
