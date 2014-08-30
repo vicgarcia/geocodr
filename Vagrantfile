@@ -6,23 +6,18 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  config.vm.box = "ubuntu/trusty64"
+    config.vm.define "geocodr" do |geocodr|
+  	config.vm.hostname = "geocodr.local"  
+	config.vm.network "private_network", ip: "192.168.33.101"
+        config.vm.box = "ubuntu/trusty64"
+  	config.vm.provider :virtualbox do |vb|
+            vb.name = "geocodr"
+            vb.memory = 512
+            vb.cpus = 1
+        end
 
-  config.vm.network "private_network", ip: "192.168.33.66"
-
-  config.vm.hostname = "geocode.local"  
-
-  config.vm.define "geocode" do |geocode|
-  end
-
-  config.vm.provider :virtualbox do |vb|
-      vb.name = "geocode"
-      vb.memory = 512
-      vb.cpus = 1
-  end
-
-  config.vm.provision "shell", path: "install.sh"
-
+        config.vm.provision "shell", path: "install.sh"
+    end
 
 
   # All Vagrant configuration is done here. The most common configuration
