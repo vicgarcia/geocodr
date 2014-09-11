@@ -26,7 +26,7 @@ su - postgres -c "psql -d geocodr -c \"CREATE EXTENSION postgis_tiger_geocoder;\
 # setup geocoder loader
 # http://gis.stackexchange.com/questions/81907/install-postgis-and-tiger-data-in-ubuntu-12-04
 # http://www.peterstratton.com/2014/04/your-own-private-geocoder-using-postgis-and-ubuntu/
-# note : the array on line 35 accepts states to use when generating the loading scripts
+# XXX the array on line 36 accepts states to use when generating the loading scripts
 mkdir /gisdata
 # configure for loader script generation
 su - postgres -c "psql -d geocodr < /vagrant/insert_geocodr_os.sql"
