@@ -13,4 +13,3 @@ PSQL=${PGBIN}/psql
 SHP2PGSQL=${PGBIN}/shp2pgsql
 cd ${staging_fold}'
 WHERE os = 'geocodr';
-
