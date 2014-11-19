@@ -18,6 +18,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             vb.cpus = 1
         end
 
+        # mount /install
+        geocodr.vm.synced_folder "install", "/install"
+
 	    geocodr.vm.provision "shell", path: "provision.sh"
     end
 

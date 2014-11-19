@@ -29,8 +29,8 @@ su - postgres -c "psql -d geocodr -c \"CREATE EXTENSION postgis_tiger_geocoder;\
 # XXX the array on line 36 accepts states to use when generating the loading scripts
 mkdir /gisdata
 # configure for loader script generation
-su - postgres -c "psql -d geocodr < /vagrant/insert_geocodr_os.sql"
-su - postgres -c "psql -d geocodr < /vagrant/update_declare_sect.sql"
+su - postgres -c "psql -d geocodr < /install/insert_geocodr_os.sql"
+su - postgres -c "psql -d geocodr < /install/update_declare_sect.sql"
 # generate and run loader scripts
 su - postgres -c "psql -A -t -d geocodr -c \"SELECT loader_generate_nation_script('geocodr');\"" | sh
 su - postgres -c "psql -A -t -d geocodr -c \"SELECT loader_generate_script(ARRAY['IL'], 'geocodr');\"" | sh
@@ -40,16 +40,16 @@ su - postgres -c "psql -A -t -d geocodr -c \"SELECT install_missing_indexes();\"
 # install nginx and php
 apt-get -y install php5-fpm php5-cli php5-mcrypt php5-pgsql nginx
 php5enmod mcrypt
-cp /vagrant/nginx.conf /etc/nginx/nginx.conf
+cp /install/nginx.conf /etc/nginx/nginx.conf
 rm -rf /etc/nginx/sites-available
 rm -rf /etc/nginx/sites-enabled
 
 # install geocodr api
 mkdir /opt/geocodr
 mkdir /opt/geocodr/public
-cp /vagrant/composer.json /opt/geocodr/composer.json
-cp /vagrant/geocodr.php /opt/geocodr/public/index.php
-cp /vagrant/config.php /opt/geocodr/config.php
+cp /install/composer.json /opt/geocodr/composer.json
+cp /install/geocodr.php /opt/geocodr/public/index.php
+cp /install/config.php /opt/geocodr/config.php
 cd /opt/geocodr
 curl -s https://getcomposer.org/installer | php
 php composer.phar install
