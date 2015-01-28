@@ -10,7 +10,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         geocodr.vm.box = "ubuntu/trusty64"
 
   	    geocodr.vm.hostname = "geocodr.local"
-	    geocodr.vm.network "private_network", ip: "192.168.33.101"
+	    geocodr.vm.network "private_network", ip: "192.168.33.171"
 
     	config.vm.provider :virtualbox do |vb|
             vb.name = "geocodr"
