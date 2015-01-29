@@ -55,7 +55,7 @@ cp /install/nginx.conf /etc/nginx/nginx.conf
 rm -rf /etc/nginx/sites-available
 rm -rf /etc/nginx/sites-enabled
 
-# install geocodr api
+# install geocodr api app
 mkdir /opt/geocodr
 mkdir /opt/geocodr/public
 cp /install/composer.json /opt/geocodr/composer.json
