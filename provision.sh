@@ -2,8 +2,8 @@
 
 # update apt repositories and install essentials
 apt-get -y update
-apt-get -y install git curl build-essential python-software-properties
-apt-get -qq -y install apg nmap zip unzip tmux vim-nox
+apt-get install -y git curl build-essential python-software-properties
+apt-get install -y apg nmap zip unzip tmux vim-nox
 
 ## setup postgres/postgis and gis tools
 
@@ -17,7 +17,7 @@ apt-get -y install postgresql-9.3-postgis-2.1 postgresql-contrib
 # http://www.peterstratton.com/2014/04/how-to-install-postgis-2-dot-1-and-postgresql-9-dot-3-on-ubuntu-servers/
 
 # install gdal and other gis tools
-apt-get -y install binutils libproj-dev gdal-bin libgeoip1 libgtk2.0
+apt-get install -y binutils libproj-dev gdal-bin libgeoip1 libgtk2.0
 
 # configure postgres with geocodr user and database
 su - postgres -c "psql -c \"CREATE USER geocodr WITH PASSWORD 'geocodr' SUPERUSER LOGIN;\""
@@ -49,7 +49,7 @@ su - postgres -c "psql -A -t -d geocodr -c \"SELECT install_missing_indexes();\"
 ## setup geocoder api and service
 
 # install nginx and php
-apt-get -y install php5-fpm php5-cli php5-mcrypt php5-pgsql nginx
+apt-get install -y php5-fpm php5-cli php5-mcrypt php5-pgsql nginx
 php5enmod mcrypt
 cp /install/nginx.conf /etc/nginx/nginx.conf
 rm -rf /etc/nginx/sites-available
