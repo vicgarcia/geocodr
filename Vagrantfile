@@ -21,8 +21,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         # mount /install, used during provision.sh to install/config
         geocodr.vm.synced_folder "install", "/install"
 
-	# run provision.sh script to install/configure software stack
-	geocodr.vm.provision "shell", path: "provision.sh"
+        # run provision.sh script to install/configure software stack
+        geocodr.vm.provision "shell", path: "provision.sh"
     end
 
 end
