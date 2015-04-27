@@ -8,10 +8,7 @@ apt-get install -y apg nmap zip unzip tmux vim-nox
 ## setup postgres/postgis and gis tools
 
 # install postgres 9.3 and postgis 2.1
-echo "deb http://apt.postgresql.org/pub/repos/apt trusty-pgdg main" >> /etc/apt/sources.list
-wget --quiet -O - http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | apt-key add -
-apt-get -y update
-apt-get -y install postgresql-9.3-postgis-2.1 postgresql-contrib
+apt-get install -y postgresql-9.3-postgis-2.1 postgresql-contrib
 
 # http://trac.osgeo.org/postgis/wiki/UsersWikiPostGIS21UbuntuPGSQL93Apt
 # http://www.peterstratton.com/2014/04/how-to-install-postgis-2-dot-1-and-postgresql-9-dot-3-on-ubuntu-servers/
